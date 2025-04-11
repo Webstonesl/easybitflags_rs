@@ -3,15 +3,20 @@ name = "easybitflags"
 version = "0.2.0"
 edition = "2024"
 description = "An implementation making it easy to use bitflags in Rust."
-repository = "https://github.com/Webstonesl/easybitflags_rs"
+repository.workspace = true
 
 [lib]
 name = "easybitflags"
 
 
 [dependencies]
-flags_derive = { path = "./flags_derive", version = "0.1.0" }
+flags_derive = { path = "./flags_derive", version = "=0.1.0" }
 
 [workspace]
 resolver = "2"
-members = ["flags_derive"]
+members = [".", "flags_derive"]
+
+[workspace.package]
+authors = ["Timo Barnard (timo@onerockaudio.co.za)"]
+license-file = "LICENSE.txt"
+repository = "https://github.com/Webstonesl/easybitflags_rs"
