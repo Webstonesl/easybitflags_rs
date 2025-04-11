@@ -338,19 +338,19 @@ fn wrapper<T, R: Into<TokenStream>, F: Fn(T) -> Result<R, syn::Error>>(
     }
 }
 
-/// ## Sample Use
-/// ```rust
-/// use easybitflags::derive_flags;
-/// derive_flags! {
-/// #[derive(Debug)]
-/// #[flag]
-/// pub enum Flag {
-///     A = 2,B = 4,C = 8,D = 16
-/// }
-/// #[flags]
-/// pub struct Flags(u8);
-/// }
-/// ```
+// / ## Sample Use
+// / ```rust
+// / use easybitflags::derive_flags;
+// / derive_flags! {
+// / #[derive(Debug)]
+// / #[flag]
+// / pub enum Flag {
+// /     A = 2,B = 4,C = 8,D = 16
+// / }
+// / #[flags]
+// / pub struct Flags(u8);
+// / }
+// / ```
 #[proc_macro]
 pub fn derive_flags(item: TokenStream) -> TokenStream {
     wrapper(item, _derive_flags)
