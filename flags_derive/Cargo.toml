@@ -4,8 +4,6 @@ version = "0.1.0"
 edition = "2024"
 repository.workspace = true
 license.workspace = true
-rust-version.workspace = true
-include.workspace = true
 
 [lib]
 proc-macro = true

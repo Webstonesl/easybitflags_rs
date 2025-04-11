@@ -5,13 +5,12 @@ members = [".", "flags_derive"]
 authors = ["Timo Barnard (timo@onerockaudio.co.za)"]
 license-file = "LICENSE.txt"
 repository = "https://github.com/Webstonesl/easybitflags_rs"
-version = "0.2.0"
 edition = "2024"
 [package]
 name = "easybitflags"
 description = "An implementation making it easy to use bitflags in Rust."
+version = "0.2.0"
 repository.workspace = true
-version.workspace = true
 edition.workspace = true
 
 [lib]
