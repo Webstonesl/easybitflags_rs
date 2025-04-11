@@ -124,7 +124,6 @@ fn _derive_flags(item: TokenStream) -> Result<TokenStream, syn::Error> {
     };
     let mut disciminants: BTreeSet<u32> = BTreeSet::new();
     for var in flag_enum.variants.iter_mut() {
-        // var.discriminant.map(|(_,e)|  )
         let req = match var.discriminant.as_ref().map(|a| &a.1) {
             Some(Expr::Lit(ExprLit {
                 lit: Lit::Int(li), ..
@@ -138,7 +137,6 @@ fn _derive_flags(item: TokenStream) -> Result<TokenStream, syn::Error> {
                 }
                 Err(e) => return Err(e.into()),
             },
-
             Some(a) => {
                 return Err(Error::new(a.span(), "Discriminant must be literal"));
             }
@@ -223,9 +221,15 @@ fn _derive_flags(item: TokenStream) -> Result<TokenStream, syn::Error> {
                     unsafe { std::mem::transmute(*self) }
                 }
                 #[inline]
-                fn from_primitive(value:&#tp) -> Option<Self> {
-
-                    unsafe { std::mem::transmute(*value) }
+                fn from_primitive(value: &#tp) -> Option<Self> {
+                    if ((*value) & Self::MASK != *value) {
+                        return None;
+                    }
+                    if (value.count_ones() != 1) {
+                        return None;
+                    }
+                    // SAFETY: We checked all requisites for this to be a valid value.
+                    Some(unsafe { std::mem::transmute(*value) })
                 }
             }
             impl From<#enum_ident> for #struct_ident {
@@ -334,7 +338,19 @@ fn wrapper<T, R: Into<TokenStream>, F: Fn(T) -> Result<R, syn::Error>>(
     }
 }
 
-/// Derive flags
+/// ## Sample Use
+/// ```rust
+/// use easybitflags::derive_flags;
+/// derive_flags! {
+/// #[derive(Debug)]
+/// #[flag]
+/// pub enum Flag {
+///     A = 2,B = 4,C = 8,D = 16
+/// }
+/// #[flags]
+/// pub struct Flags(u8);
+/// }
+/// ```
 #[proc_macro]
 pub fn derive_flags(item: TokenStream) -> TokenStream {
     wrapper(item, _derive_flags)

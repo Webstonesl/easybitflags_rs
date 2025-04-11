@@ -1,9 +1,13 @@
 [package]
 name = "easybitflags"
-version = "0.1.0"
+version = "0.2.0"
 edition = "2024"
+description = "An implementation making it easy to use bitflags in Rust."
+repository = "https://github.com/Webstonesl/easybitflags_rs"
+
 [lib]
 name = "easybitflags"
+
 
 [dependencies]
 flags_derive = { path = "./flags_derive" }
