@@ -12,6 +12,7 @@ description = "An implementation making it easy to use bitflags in Rust."
 version = "0.2.0"
 repository.workspace = true
 edition.workspace = true
+license-file.workspace = true
 
 [lib]
 name = "easybitflags"
