@@ -2,6 +2,7 @@
 name = "flags_derive"
 version = "0.1.0"
 edition = "2024"
+description = "Derive for the easy flags tool"
 repository.workspace = true
 license-file.workspace = true
 
